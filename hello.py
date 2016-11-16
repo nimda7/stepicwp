@@ -6,4 +6,7 @@ def app(environ, start_response):
             ]
     body = headers
     start_response(status, headers )
-    return  body 
+    resp = environ['QUERY_STRING'].split('&')
+    res = [item+"\r\n" for item in resp ]
+    return  res
+ 
