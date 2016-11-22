@@ -1,3 +1,9 @@
 Q:
 {{question.title}}
 {{question.text}}
+{{answers}}
+<br/>
+A:
+{% for answ in answers %}
+<p>{{ answ.text }}</p>
+{% endfor %}

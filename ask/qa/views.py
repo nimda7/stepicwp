@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import Http404
 from django.shortcuts import render
-from qa.models import Question
+from qa.models import Question, Answer
 from django.core.paginator import Paginator
 
 # Create your views here.
@@ -10,12 +10,16 @@ def test(request, *args, **kwargs):
         return HttpResponse('OK')
 
 
-def question_text(request, id):
+def qa_full(request, id):
     try:
         question = Question.objects.get(id=id)
+        answers = question.answer_set.all()
     except Question.DoesNotExist:
             raise Http404
-    return render(request, 'question.html', {'question':question} )
+    return render(request, 'question.html', {
+        'question':question,
+        'answers':answers,
+        } )
 
 
 def questions_list_all(request):

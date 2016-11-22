@@ -25,5 +25,5 @@ urlpatterns = [
     url(r'^ask/', qa.views.test, name='ask'),
     url(r'^popular/', qa.views.questions_list_popular, name='popular'),
     url(r'^new/', qa.views.test, name='new'),
-    url(r'^question/(?P<id>\d+)/$', qa.views.question_text, name='question'),
+    url(r'^question/(?P<id>\d+)/$', qa.views.qa_full, name='question'),
 ]
