@@ -11,6 +11,7 @@ class Question(models.Model):
     rating = models.IntegerField(default=0)
     author = models.ForeignKey(User)
     likes = models.ManyToManyField(User, related_name='likes_set')
+    objects = QuestionManager()
 
 
 class QuestionManager(models.Manager):
