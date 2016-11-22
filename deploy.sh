@@ -6,4 +6,6 @@ sudo /etc/init.d/gunicorn restart
 sudo /etc/init.d/mysql start
 virtualenv /home/box/vnv
 . /home/box/vnv/bin/activate
+mysql -uroot -e "create database stepic"
+
 
