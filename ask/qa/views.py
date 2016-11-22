@@ -30,3 +30,17 @@ def questions_list_all(request):
         'paginator': paginator,
         'page': page,
         })
+
+
+def questions_list_popular(request):
+    questions = Question.objects.order_by('-rating')
+    limit = request.GET.get('limit',10)
+    page = request.GET.get('page',1)
+    paginator = Paginator(questions,limit)
+    paginator.baseurl = '/?page='
+    page = paginator.page(page)
+    return render(request,'questions.html', {
+        'questions':  page.object_list,
+        'paginator': paginator,
+        'page': page,
+        })
