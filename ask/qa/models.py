@@ -25,6 +25,6 @@ class Question(models.Model):
 class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField(blank=True)
-    question = models.TextField()
+    question = models.ForeignKey(Question)
     author = models.ForeignKey(User)
 
