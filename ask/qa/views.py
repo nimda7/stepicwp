@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import Http404
 from django.shortcuts import render
 from qa.models import Question, Answer
-from qa.forms import AskForm
+from qa.forms import AskForm, AnswerForm
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 
@@ -11,16 +11,27 @@ from django.http import HttpResponse
 def test(request, *args, **kwargs):
         return HttpResponse('OK')
 
+def answer(request):
+    if request.method == "POST":
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            answer = form.save()
+            url = answer.get_url()
+            return HttpResponseRedirect(url)
+    else:
+        form = AnswerForm()
 
 def qa_full(request, id):
     try:
         question = Question.objects.get(id=id)
         answers = question.answer_set.all()
+        form = AnswerForm()
     except Question.DoesNotExist:
             raise Http404
     return render(request, 'question.html', {
         'question':question,
         'answers':answers,
+        'form':form,
         } )
 
 

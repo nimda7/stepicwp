@@ -6,3 +6,10 @@ A:
 {% for answ in answers %}
 <p>{{ answ.text }}</p>
 {% endfor %}
+YOUR A:
+<form method="post" action="/answer/">
+	{{ form.as_p }}
+
+	<button type="submit" class="btn btn-primary">Сохранить </button>
+	<input type="hidden" name="question_id" value="{{question.id}}">
+</form>

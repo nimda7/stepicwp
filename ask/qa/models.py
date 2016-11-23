@@ -32,3 +32,8 @@ class Answer(models.Model):
     question = models.ForeignKey(Question)
     author = models.ForeignKey(User)
 
+    def get_url(self):
+        return reverse('question', kwargs = {'id': self.question.id})
+
+    def __str__(self):
+        return self.question
