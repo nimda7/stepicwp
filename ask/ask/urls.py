@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^$', qa.views.questions_list_all),
     url(r'^login/', qa.views.test, name='login'),
     url(r'^signup/', qa.views.test, name='signup'),
-    url(r'^ask/', qa.views.test, name='ask'),
+    url(r'^ask/', qa.views.question_add, name='ask'),
     url(r'^popular/', qa.views.questions_list_popular, name='popular'),
     url(r'^new/', qa.views.test, name='new'),
     url(r'^question/(?P<id>\d+)/$', qa.views.qa_full, name='question'),
