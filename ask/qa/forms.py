@@ -20,6 +20,8 @@ class AnswerForm(forms.Form):
 
     text = forms.CharField(widget=forms.Textarea)
     question_id = forms.IntegerField(widget=forms.HiddenInput())
+    question = forms.CharField(widget=forms.HiddenInput())
+    author = forms.IntegerField(widget=forms.HiddenInput())
 
     def clean(self):
         return self.cleaned_data
