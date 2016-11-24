@@ -12,6 +12,7 @@ class AskForm(forms.Form):
         return self.cleaned_data
 
     def save(self):
+        self.cleaned_data['author'] = self._user
         post = Question(**self.cleaned_data)
         post.save()
         return post
@@ -27,8 +28,7 @@ class AnswerForm(forms.Form):
         return self.cleaned_data
 
     def save(self):
-#        assert False, self.cleaned_data
-        self.cleaned_data ['author_id'] = '1'
+        self.cleaned_data['author'] = self._user
         answer = Answer(**self.cleaned_data)
         answer.save()
         return answer

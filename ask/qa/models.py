@@ -30,7 +30,7 @@ class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField(blank=True, auto_now_add=True)
     question = models.ForeignKey(Question)
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, default=1)
 
     def get_url(self):
         return reverse('question', kwargs = {'id': self.question.id})

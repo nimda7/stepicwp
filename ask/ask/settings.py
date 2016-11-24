@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'autofixture',
+#    'autofixture',
     'qa',
 ]
 
@@ -78,6 +78,7 @@ WSGI_APPLICATION = 'ask.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        #'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'stepic',
         'USER': 'root',
         'PASSWORD': 'root',

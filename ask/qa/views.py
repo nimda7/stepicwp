@@ -16,12 +16,21 @@ def test(request, *args, **kwargs):
 def answer(request):
     if request.method == "POST":
         form = AnswerForm(request.POST)
+        form._user = request.user
         if form.is_valid():
+            assert False, "AS"
+            answer = form.save()
+            url = answer.get_url()
+            return HttpResponseRedirect(url)
+        else:
+            print ("OMFG")
             answer = form.save()
             url = answer.get_url()
             return HttpResponseRedirect(url)
     else:
         form = AnswerForm()
+        assert False, "OMG %s" % form
+        #form._user = request.user
 
 def qa_full(request, id):
     try:
@@ -67,6 +76,7 @@ def questions_list_popular(request):
 def question_add(request):
     if request.method == "POST":
         form = AskForm(request.POST)
+        form._user = request.user
         if form.is_valid():
             question = form.save()
             url = question.get_url()
@@ -78,14 +88,15 @@ def question_add(request):
         })
 
 def signup(request):
-    username = None
-    email = None
-    password = None
 
     if request.method == "POST":
         form = SignupForm(request.POST)
+        username = request.POST['username']
+        password = request.POST['password']
         if form.is_valid():
             form.save()
+            user = auth.authenticate(username=username, password=password)
+            auth.login(request, user)
             return HttpResponseRedirect('/')
     else:
         form = SignupForm()
