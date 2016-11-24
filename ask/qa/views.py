@@ -2,9 +2,11 @@ from django.shortcuts import render
 from django.http import Http404
 from django.shortcuts import render
 from qa.models import Question, Answer
-from qa.forms import AskForm, AnswerForm
+from qa.forms import AskForm, AnswerForm, SignupForm, LoginForm
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
+
+from django.contrib import auth
 
 # Create your views here.
 from django.http import HttpResponse 
@@ -72,5 +74,41 @@ def question_add(request):
     else:
         form = AskForm()
     return render(request, 'question_add.html', {
+        'form' : form,
+        })
+
+def signup(request):
+    username = None
+    email = None
+    password = None
+
+    if request.method == "POST":
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
+    else:
+        form = SignupForm()
+    return render(request, 'signup.html', {
+        'form' : form,
+        })
+
+
+def login(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        #form = LoginForm(request.POST)
+        user = auth.authenticate(username=username, password=password)
+        if user is not None:
+            auth.login(request,user)
+            print("AUTH OK")
+            return HttpResponseRedirect('/')
+        else:
+            print("AUTH NOT OK")
+            return HttpResponseRedirect('/')
+    else:
+        form = LoginForm()
+    return render(request, 'login.html', {
         'form' : form,
         })
