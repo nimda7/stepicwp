@@ -18,19 +18,15 @@ def answer(request):
         form = AnswerForm(request.POST)
         form._user = request.user
         if form.is_valid():
-            assert False, "AS"
             answer = form.save()
             url = answer.get_url()
             return HttpResponseRedirect(url)
         else:
-            print ("OMFG")
             answer = form.save()
             url = answer.get_url()
             return HttpResponseRedirect(url)
     else:
         form = AnswerForm()
-        assert False, "OMG %s" % form
-        #form._user = request.user
 
 def qa_full(request, id):
     try:
